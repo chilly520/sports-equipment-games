@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PWA 图标生成器</title>
+</head>
+<body style="background: #f5f5f5; padding: 20px; font-family: sans-serif;">
+  <h2>🎯 体育教具 PWA 图标生成器</h2>
+  <p>点击下方按钮生成并下载 PNG 图标：</p>
+  
+  <div style="margin: 20px 0;">
+    <canvas id="canvas192" width="192" height="192" style="border: 1px solid #ddd; margin: 10px;"></canvas><br>
+    <button onclick="downloadIcon(192, 'icon-192.png')" style="padding: 10px 20px; background: #10B981; color: white; border: none; cursor: pointer; margin: 5px;">
+      下载 192x192 (Android/iOS)
+    </button>
+  </div>
+  
+  <div style="margin: 20px 0;">
+    <canvas id="canvas512" width="512" height="512" style="border: 1px solid #ddd; margin: 10px;"></canvas><br>
+    <button onclick="downloadIcon(512, 'icon-512.png')" style="padding: 10px 20px; background: #059669; color: white; border: none; cursor: pointer; margin: 5px;">
+      下载 512x512 (Android/Chrome)
+    </button>
+  </div>
+
+  <script>
+    function drawIcon(size) {
+      const canvas = document.getElementById('canvas' + size);
+      const ctx = canvas.getContext('2d');
+      const scale = size / 512;
+      
+      // 背景
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#10B981');
+      gradient.addColorStop(1, '#059669');
+      
+      ctx.beginPath();
+      ctx.roundRect(0, 0, size, size, 108 * scale);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      
+      // 内圈
+      ctx.beginPath();
+      ctx.arc(size/2, size/2, 200 * scale, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 4 * scale;
+      ctx.stroke();
+      
+      // 靶心
+      const cy = 220 * scale;
+      ctx.beginPath();
+      ctx.arc(size/2, cy, 90 * scale, 0, Math.PI * 2);
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 12 * scale;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(size/2, cy, 60 * scale, 0, Math.PI * 2);
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 8 * scale;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(size/2, cy, 30 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(size/2, cy, 12 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = '#10B981';
+      ctx.fill();
+      
+      // 运动小人
+      const px = size/2 - 76 * scale;
+      const py = 310 * scale;
+      
+      ctx.beginPath();
+      ctx.arc(px + 76 * scale, py + 20 * scale, 22 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.moveTo(px + 76 * scale, py + 45 * scale);
+      ctx.lineTo(px + 76 * scale, py + 95 * scale);
+      ctx.moveTo(px + 76 * scale, py + 55 * scale);
+      ctx.lineTo(px + 40 * scale, py + 80 * scale);
+      ctx.moveTo(px + 76 * scale, py + 55 * scale);
+      ctx.lineTo(px + 112 * scale, py + 80 * scale);
+      ctx.moveTo(px + 76 * scale, py + 95 * scale);
+      ctx.lineTo(px + 56 * scale, py + 140 * scale);
+      ctx.moveTo(px + 76 * scale, py + 95 * scale);
+      ctx.lineTo(px + 96 * scale, py + 140 * scale);
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 10 * scale;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      
+      // 装饰圆点
+      ctx.beginPath();
+      ctx.arc(120 * scale, 130 * scale, 15 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(392 * scale, 150 * scale, 10 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(380 * scale, 380 * scale, 18 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.2)';
+      ctx.fill();
+    }
+    
+    function downloadIcon(size, filename) {
+      const canvas = document.getElementById('canvas' + size);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    
+    drawIcon(192);
+    drawIcon(512);
+  </script>
+</body>
+</html>
