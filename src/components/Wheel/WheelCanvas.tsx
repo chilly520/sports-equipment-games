@@ -114,8 +114,13 @@ export function WheelCanvas({ equipments, rotation, selectedIndex, size = 350 }:
   return (
     <canvas
       ref={canvasRef}
-      style={{ width: size, height: size, maxWidth: '100%' }}
-      className="drop-shadow-2xl"
+      style={{ 
+        width: '100%', 
+        maxWidth: size, 
+        aspectRatio: '1 / 1',
+        display: 'block'
+      }}
+      className="drop-shadow-2xl mx-auto"
     />
   )
 }
