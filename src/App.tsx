@@ -13,7 +13,7 @@ import { TodayRecommendPage } from '@/pages/TodayRecommendPage'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/sports-equipment-games">
       <div className="min-h-screen bg-pattern">
         <Header />
         <MobileNav />
